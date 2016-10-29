@@ -69,7 +69,7 @@ export default class GuessFieldContainer extends Component {
   render() {
     return (
       <section className='game-container'>
-        <GuessField handleChangeGuess={this.compareNumbers} handleRandomNumber={this.generateRandomNumber} handleResetGame={this.resetGame} handleClear={this.clearInput} />
+        <GuessField handleChangeGuess={this.updateGuessState} handleRandomNumber={this.generateRandomNumber} handleResetGame={this.resetGame} handleClear={this.clearInput} />
         <Display guess={this.state.guess} />
       </section>
     )
