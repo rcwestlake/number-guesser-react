@@ -15,6 +15,7 @@ export default class GuessFieldContainer extends Component {
     this.updateGuessState = this.updateGuessState.bind(this)
     this.compareNumbers = this.compareNumbers.bind(this)
     this.generateRandomNumber = this.generateRandomNumber.bind(this)
+    this.resetGame = this.resetGame.bind(this)
   }
 
   changeMaxRange() {
@@ -23,6 +24,15 @@ export default class GuessFieldContainer extends Component {
 
   changeMinRange() {
 
+  }
+
+  resetGame() {
+    this.setState({
+      randomNum: null,
+      guess: null,
+      min: 0,
+      max: 0,
+    })
   }
 
   compareNumbers() {
@@ -51,7 +61,7 @@ export default class GuessFieldContainer extends Component {
   render() {
     return (
       <section className='game-container'>
-        <GuessField handleChangeGuess={this.compareNumbers} handleRandomNumber={this.generateRandomNumber}/>
+        <GuessField handleChangeGuess={this.compareNumbers} handleRandomNumber={this.generateRandomNumber} handleResetGame={this.resetGame}/>
         <Display guess={this.state.guess}/>
       </section>
     )

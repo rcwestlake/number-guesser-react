@@ -1,23 +1,25 @@
 import React, { Component } from 'react'
 import Range from './Range.jsx'
+import SubmitButton from './SubmitButton.jsx'
+import ClearButton from './ClearButton.jsx'
+
 
 export default class GuessField extends Component {
   render() {
-    //TODO: add onClick for buttons
+    const { handleChangeGuess, handleResetGame } = this.props
     return (
       <div>
       <Range />
       <section className='guess-container'>
       <form className='guess-form'>
-      <input
+        <input
             type='number'
             placeholder='Make a guess'
             aria-label='input'
-            className='guess-input' />
-      <button
-            type='button'
-            onClick={(e) => this.props.handleChangeGuess(e)}>Guess</button>
-      <button type='button'>Clear</button>
+            className='guess-input'
+            />
+        <SubmitButton handleChangeGuess={handleChangeGuess}/>
+        <ClearButton handleResetGame={handleResetGame} />
       </form>
       </section>
       </div>
