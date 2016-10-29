@@ -26,19 +26,26 @@ export default class GuessFieldContainer extends Component {
 
   }
 
+  clearInput() {
+    const input = document.querySelector('.guess-input')
+    input.value = ''
+  }
+
   resetGame() {
+    console.log('entered reset game function')
     this.setState({
       randomNum: null,
       guess: null,
       min: 0,
       max: 0,
     })
+    this.clearInput();
   }
 
   compareNumbers() {
     this.updateGuessState()
-    if(this.state.randomNum) {
-      console.log('compareNumbers function')
+    if(!this.state.randomNum) {
+      this.generateRandomNumber()
     }
   }
 
@@ -47,12 +54,13 @@ export default class GuessFieldContainer extends Component {
     this.setState=({
       randomNum: number
     })
-    console.log(number)
+    console.log('random number: ', number)
   }
 
-  updateGuessState(e) {
+  updateGuessState() {
     const input = document.querySelector('.guess-input')
-    const value = input.value
+    let value = input.value
+    console.log(value)
     this.setState({
       guess: value
     })
@@ -61,8 +69,8 @@ export default class GuessFieldContainer extends Component {
   render() {
     return (
       <section className='game-container'>
-        <GuessField handleChangeGuess={this.compareNumbers} handleRandomNumber={this.generateRandomNumber} handleResetGame={this.resetGame}/>
-        <Display guess={this.state.guess}/>
+        <GuessField handleChangeGuess={this.compareNumbers} handleRandomNumber={this.generateRandomNumber} handleResetGame={this.resetGame} handleClear={this.clearInput} />
+        <Display guess={this.state.guess} />
       </section>
     )
   }

@@ -4,7 +4,7 @@ const ClearButton = (props) => {
   return (
     <button
           type='button'
-          onClick={() => props.handleResetGame()}>Clear
+          onClick={() => props.handleClear()}>Clear
     </button>
   )
 }

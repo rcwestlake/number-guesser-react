@@ -1,12 +1,10 @@
-import React from 'react'
-
-const SubmitButton = (props) => {
-  return (
-    <button
-          type='button'
-          onClick={(e) => props.handleChangeGuess(e)}>Guess
-    </button>
-  )
-}
-
-module.exports = SubmitButton
+// import React from 'react'
+//
+// export default ({ handleChangeGuess }) => {
+//   return (
+//     <button
+//           type='button'
+//           onClick={(e) => handleChangeGuess(e)}>Guess
+//     </button>
+//   )
+// }

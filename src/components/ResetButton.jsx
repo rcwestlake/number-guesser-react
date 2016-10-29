@@ -4,7 +4,7 @@ const ResetButton = (props) => {
   return (
     <button
           type='button'
-          onClick={(e) => props.handleChangeGuess(e)}>Clear
+          onClick={() => props.handleReset()}>Reset Game
     </button>
   )
 }
