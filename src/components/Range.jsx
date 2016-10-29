@@ -2,14 +2,6 @@ import React, { Component } from 'react';
 
 
 export default class Range extends Component {
-  constructor() {
-    super()
-
-    this.state=({
-      low: '',
-      high: ''
-    })
-  }
   render() {
     return (
       <section className='ranger-container'>
