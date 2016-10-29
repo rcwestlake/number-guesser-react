@@ -19,7 +19,8 @@ export default class GuessField extends Component {
       <section className='guess-container'>
         <form className='guess-form'>
           <input type='number' aria-label='input' onChange={() => this.updateGuessState()} className='guess-input' />
-          <button type='button' onClick='to be filled in'>Guess</button>
+          <button type='button' onClick='TO BE FILLED IN'>Guess</button>
+          <button type='button' onClick='TO BE FILLED IN'>Clear</button>
         </form>
       </section>
     )

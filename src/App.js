@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './components/Header.jsx'
 import GuessField from './components/GuessField.jsx'
+import Display from './components/Display.jsx'
 import './App.css';
 
 export default class App extends Component {
@@ -15,7 +16,10 @@ export default class App extends Component {
     return (
       <section className="application">
         <Header />
-        <GuessField />
+        <section className='display-container'>
+          <GuessField />
+          <Display />
+        </section>
       </section>
     );
   }
