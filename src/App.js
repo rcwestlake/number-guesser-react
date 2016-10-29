@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './components/Header.jsx'
+import GuessField from './components/GuessField.jsx'
 import './App.css';
 
 export default class App extends Component {
@@ -7,15 +8,14 @@ export default class App extends Component {
     super()
 
     this.state=({
-      randomNumber: null,
-      userGuess: null
+
     })
   }
   render() {
     return (
       <section className="application">
         <Header />
-
+        <GuessField />
       </section>
     );
   }
