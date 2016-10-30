@@ -13,7 +13,8 @@ export default class App extends Component {
       guess: null,
       min: 0,
       max: 100,
-      feedback: ''
+      feedback: '',
+      error: ''
     })
   }
 
@@ -46,7 +47,12 @@ export default class App extends Component {
 
   updateGuessState(e) {
     const value = parseInt(e.target.value, 10);
-    this.setState({ guess: value })
+
+    if(value < this.state.min || value > this.state.max) {
+      this.setState({ guess: null, error: 'Please enter number in range' })
+    } else {
+      this.setState({ guess: value, error: '' })
+    }
   }
 
   newGame() {
@@ -82,7 +88,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { guess, feedback } = this.state;
+    const { guess, feedback, max, min, error } = this.state;
     return (
       <section className='application'>
         <Header />
@@ -92,8 +98,9 @@ export default class App extends Component {
             handleGame={() => this.compareNumbers()}
             handleResetGame={() => this.resetGame()}
             handleClear={() => this.clearInput()}
-            min={this.state.min}
-            max={this.state.max}
+            min={min}
+            max={max}
+            error={error}
           />
           <Display guess={guess} feedback={feedback} />
         </section>

@@ -2,7 +2,7 @@ import React from 'react'
 import Range from './Range.jsx'
 
 
-export default ({ handleGuessState, handleGame, handleResetGame, handleClear, min, max  }) => {
+export default ({ handleGuessState, handleGame, handleResetGame, handleClear, min, max, error  }) => {
   return (
     <div>
     <Range />
@@ -17,6 +17,7 @@ export default ({ handleGuessState, handleGame, handleResetGame, handleClear, mi
             min={min}
             max={max}
             />
+        <p>{error}</p>
         <button type='button' onClick={() => handleGame()}>Guess</button>
         <button type='button' onClick={() => handleClear()}>Clear</button>
         <button type='button' onClick={() => handleResetGame()}>Reset Game</button>
