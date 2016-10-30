@@ -7,10 +7,10 @@ export default class GuessFieldContainer extends Component {
     super(props)
 
     this.state=({
-      randomNum: null,
+      randomNum: 0,
       guess: null,
       min: 0,
-      max: 100
+      max: 100,
     })
     this.updateGuessState = this.updateGuessState.bind(this)
     this.compareNumbers = this.compareNumbers.bind(this)
@@ -27,14 +27,13 @@ export default class GuessFieldContainer extends Component {
   }
 
   clearInput() {
-    const input = document.querySelector('.guess-input');
-    input.value = ''
+    return document.querySelector('.guess-input').value = '';
   }
 
   resetGame() {
     console.log('entered reset game function');
     this.setState({
-      randomNum: null,
+      randomNum: 0,
       guess: null,
       min: 0,
       max: 0,
@@ -43,22 +42,17 @@ export default class GuessFieldContainer extends Component {
   }
 
   compareNumbers() {
-    const input = document.querySelector('.guess-input');
-    let value = parseInt(input.value);
+    const value = parseInt(document.querySelector('.guess-input').value, 0);
     this.setState({
       guess: value,
     })
 
     if(!this.state.randomNum) {
       let randomNumber = this.generateRandomNumber();
-      console.log(randomNumber);
-
       this.setState({
         randomNum: randomNumber
       })
     }
-
-    this.checkGame()
   }
 
   generateRandomNumber() {
@@ -75,6 +69,16 @@ export default class GuessFieldContainer extends Component {
   }
 
   render() {
+    let feedback;
+    if(this.state.guess < this.state.randomNum) {
+        feedback = 'That guess is too low. Try a higher number.'
+    } else if(this.state.guess > this.state.randomNum) {
+        feedback = 'That guess is too high. Try a lower number.'
+    } else if(this.state.guess === this.state.randomNum){
+      feedback = 'Congratulations! You win.'
+    } else {
+      feedback = ''
+    }
     return (
       <section className='game-container'>
         <GuessField
@@ -86,7 +90,7 @@ export default class GuessFieldContainer extends Component {
           min={this.state.min}
           max={this.state.max}
         />
-        <Display guess={this.state.guess} />
+        <Display guess={this.state.guess} feedback={feedback} />
       </section>
     )
   }
