@@ -15,7 +15,8 @@ export default class App extends Component {
       min: 0,
       max: 100,
       feedback: '',
-      error: ''
+      error: '',
+      disabled: true
     })
   }
 
@@ -41,31 +42,38 @@ export default class App extends Component {
     } else if(this.state.guess > this.state.randomNum) {
       this.setState({feedback: 'That guess is too high. Try a lower number.'})
     } else {
-      this.setState({feedback: 'Congratulations! You win.'})
+      this.setState({feedback: 'Congratulations! You win. Now it will be harder (min and max changed).'})
       this.newGame()
     }
   }
 
   updateGuessState(e) {
+    const input = document.querySelector('.guess-input')
     const value = parseInt(e.target.value, 10);
 
     if(value < this.state.min || value > this.state.max) {
       this.setState({ guess: null, error: 'Please enter number in range' })
     } else {
-      this.setState({ guess: value, error: '' })
+      this.setState({ guess: value, error: '', disabled: true })
     }
 
     if(isNaN(value)) {
-      this.setState({ guess: null, error: 'Please enter a number' })
+      this.setState({ guess: null, error: 'Please enter a number', disabled: true })
+    }
+
+    console.log(input.value);
+
+    if(input.value.length > 0) {
+      this.setState({ disabled: false })
     }
   }
 
   newGame() {
     this.setState({
       randomNum: null,
-      guess: null,
       min: this.state.min - 10,
       max: this.state.max + 10,
+      error: ''
     })
     this.clearInput();
   }
@@ -75,7 +83,9 @@ export default class App extends Component {
       randomNum: null,
       guess: null,
       min: 0,
-      max: 0,
+      max: 100,
+      feedback: '',
+      error: ''
     })
     this.clearInput();
   }
@@ -85,12 +95,16 @@ export default class App extends Component {
   }
 
   clearInput() {
+    this.setState({
+      guess: null,
+      disabled: true
+    })
     return document.querySelector('.guess-input').value = '';
   }
 
 
   render() {
-    const { guess, feedback, max, min, error } = this.state;
+    const { guess, feedback, max, min, error, disabled } = this.state;
     return (
       <section className='application'>
         <Header />
@@ -103,6 +117,7 @@ export default class App extends Component {
             min={min}
             max={max}
             error={error}
+            disabled={disabled}
           />
           <Range min={min} max={max} handleChangeRange={() => this.updateRange()}/>
           <Display guess={guess} feedback={feedback} />

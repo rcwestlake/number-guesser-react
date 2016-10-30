@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default ({ handleGuessState, handleGame, handleResetGame, handleClear, min, max, error  }) => {
+export default ({ handleGuessState, handleGame, handleResetGame, handleClear, min, max, error, disabled  }) => {
   return (
     <div>
     <section className='guess-container'>
@@ -15,8 +15,8 @@ export default ({ handleGuessState, handleGame, handleResetGame, handleClear, mi
             max={max}
             />
         <p>{error}</p>
-        <button type='button' onClick={() => handleGame()}>Guess</button>
-        <button type='button' onClick={() => handleClear()}>Clear</button>
+        <button type='button' disabled={disabled} onClick={() => handleGame()}>Guess</button>
+        <button type='button' disabled={disabled} onClick={() => handleClear()}>Clear</button>
         <button type='button' onClick={() => handleResetGame()}>Reset Game</button>
       </form>
     </section>
