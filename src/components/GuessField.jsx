@@ -2,7 +2,7 @@ import React from 'react'
 import Range from './Range.jsx'
 
 
-export default ({ handleChangeGuess, handleResetGame, handleClear, min, max  }) => {
+export default ({ handleChangeGuess, handleGame, handleResetGame, handleClear, min, max  }) => {
   return (
     <div>
     <Range />
@@ -15,13 +15,12 @@ export default ({ handleChangeGuess, handleResetGame, handleClear, min, max  }) 
             className='guess-input'
             min={min}
             max={max}
-
             />
-        <button type='button' onClick={handleChangeGuess}>Guess</button>
+        <button type='button' onClick={handleGame}>Guess</button>
         <button type='button' onClick={handleClear}>Clear</button>
         <button type='button' onClick={handleResetGame}>Reset Game</button>
       </form>
     </section>
-    </div>
+</div>
   )
 }

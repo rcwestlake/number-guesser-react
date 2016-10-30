@@ -27,12 +27,12 @@ export default class GuessFieldContainer extends Component {
   }
 
   clearInput() {
-    const input = document.querySelector('.guess-input')
+    const input = document.querySelector('.guess-input');
     input.value = ''
   }
 
   resetGame() {
-    console.log('entered reset game function')
+    console.log('entered reset game function');
     this.setState({
       randomNum: null,
       guess: null,
@@ -43,24 +43,32 @@ export default class GuessFieldContainer extends Component {
   }
 
   compareNumbers() {
-    this.updateGuessState()
+    const input = document.querySelector('.guess-input');
+    let value = parseInt(input.value);
+    this.setState({
+      guess: value,
+    })
+
     if(!this.state.randomNum) {
-      this.generateRandomNumber()
+      let randomNumber = this.generateRandomNumber();
+      console.log(randomNumber);
+
+      this.setState({
+        randomNum: randomNumber
+      })
     }
+
+    this.checkGame()
   }
 
   generateRandomNumber() {
-    const number = Math.floor((Math.random() * this.state.max) + 1)
-    this.setState=({
-      randomNum: number
-    })
-    console.log('random number: ', number)
+    return Math.floor((Math.random() * this.state.max) + 1);
   }
 
   updateGuessState() {
-    const input = document.querySelector('.guess-input')
-    let value = input.value
-    console.log(value)
+    const input = document.querySelector('.guess-input');
+    let value = input.value;
+    console.log(value);
     this.setState({
       guess: value
     })
@@ -70,12 +78,14 @@ export default class GuessFieldContainer extends Component {
     return (
       <section className='game-container'>
         <GuessField
-          handleChangeGuess={this.updateGuessState}
+          // handleChangeGuess={this.updateGuessState}
+          handleGame={this.compareNumbers}
           handleRandomNumber={this.generateRandomNumber}
           handleResetGame={this.resetGame}
           handleClear={this.clearInput}
           min={this.state.min}
-          max={this.state.max} />
+          max={this.state.max}
+        />
         <Display guess={this.state.guess} />
       </section>
     )
