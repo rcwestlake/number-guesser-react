@@ -1,24 +1,25 @@
-import React, { Component } from 'react'
-import Range from './Range.jsx'
+import React from 'react'
 
-
-export default ({ handleChangeGuess, handleResetGame, handleClear  }) => {
+export default ({ handleGuessState, handleGame, handleResetGame, handleClear, min, max, error, disabled  }) => {
   return (
     <div>
-    <Range />
     <section className='guess-container'>
-    <form className='guess-form'>
-      <input
-          type='number'
-          placeholder='Make a guess'
-          aria-label='input'
-          className='guess-input'
-          />
-      <button type='button' onClick={handleChangeGuess}>Guess</button>
-      <button type='button' onClick={handleClear}>Clear</button>
-      <button type='button' onClick={handleResetGame}>Reset Game</button>
-    </form>
+      <form className='guess-form'>
+        <input
+            type='number'
+            placeholder='Make a guess'
+            aria-label='input'
+            className='guess-input'
+            onChange={(e) => handleGuessState(e)}
+            min={min}
+            max={max}
+            />
+        <p>{error}</p>
+        <button type='button' disabled={disabled} onClick={() => handleGame()}>Guess</button>
+        <button type='button' disabled={disabled} onClick={() => handleClear()}>Clear</button>
+        <button type='button' onClick={() => handleResetGame()}>Reset Game</button>
+      </form>
     </section>
-    </div>
+</div>
   )
 }
