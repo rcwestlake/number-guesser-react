@@ -15,9 +15,6 @@ export default class App extends Component {
       max: 100,
       feedback: ''
     })
-
-    this.compareNumbers = this.compareNumbers.bind(this)
-    this.resetGame = this.resetGame.bind(this)
   }
 
   generateRandomNumber() {
@@ -89,8 +86,9 @@ export default class App extends Component {
         <section className='game-container'>
           <GuessField
             handleGuessState={(e) => this.updateGuessState(e)}
-            handleGame={this.compareNumbers}
-            handleResetGame={this.resetGame}
+            handleGame={() => this.compareNumbers()}
+            handleResetGame={() => this.resetGame()}
+            handleClear={() => this.clearInput()}
             min={this.state.min}
             max={this.state.max}
           />

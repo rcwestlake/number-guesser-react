@@ -17,9 +17,9 @@ export default ({ handleGuessState, handleGame, handleResetGame, handleClear, mi
             min={min}
             max={max}
             />
-        <button type='button' onClick={handleGame}>Guess</button>
-        <button type='button' onClick={handleClear}>Clear</button>
-        <button type='button' onClick={handleResetGame}>Reset Game</button>
+        <button type='button' onClick={() => handleGame()}>Guess</button>
+        <button type='button' onClick={() => handleClear()}>Clear</button>
+        <button type='button' onClick={() => handleResetGame()}>Reset Game</button>
       </form>
     </section>
 </div>
