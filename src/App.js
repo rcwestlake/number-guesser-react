@@ -5,8 +5,8 @@ import Header from './components/Header.jsx'
 import './App.css'
 
 export default class App extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
 
     this.state=({
       randomNum: null,
@@ -34,12 +34,29 @@ export default class App extends Component {
   }
 
   checkGame() {
-
+    if(this.state.guess < this.state.randomNum) {
+      this.setState({feedback: 'That guess is too low. Try a higher number.'})
+    } else if(this.state.guess > this.state.randomNum) {
+      this.setState({feedback: 'That guess is too high. Try a lower number.'})
+    } else {
+      this.setState({feedback: 'Congratulations! You win.'})
+      this.newGame()
+    }
   }
 
   updateGuessState(e) {
     const value = parseInt(e.target.value, 10);
     this.setState({ guess: value })
+  }
+
+  newGame() {
+    this.setState({
+      randomNum: null,
+      guess: null,
+      min: this.state.min - 10,
+      max: this.state.max + 10,
+    })
+    this.clearInput();
   }
 
   resetGame() {
@@ -56,20 +73,6 @@ export default class App extends Component {
     return document.querySelector('.guess-input').value = '';
   }
 
-  feedback() {
-    let feedback;
-    if(this.state.guess < this.state.randomNum) {
-        feedback = 'That guess is too low. Try a higher number.'
-    } else if(this.state.guess > this.state.randomNum) {
-        feedback = 'That guess is too high. Try a lower number.'
-    } else if(this.state.guess === this.state.randomNum){
-      feedback = 'Congratulations! You win.'
-    } else {
-      feedback = ''
-    }
-    return feedback
-  }
-
   changeMaxRange() {
 
   }
@@ -79,7 +82,7 @@ export default class App extends Component {
   }
 
   render() {
-    let feedback = this.feedback()
+    const { guess, feedback } = this.state;
     return (
       <section className='application'>
         <Header />
@@ -92,7 +95,7 @@ export default class App extends Component {
             min={this.state.min}
             max={this.state.max}
           />
-          <Display guess={this.state.guess} feedback={feedback} />
+          <Display guess={guess} feedback={feedback} />
         </section>
       </section>
     )
