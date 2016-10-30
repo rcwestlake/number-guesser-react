@@ -52,7 +52,7 @@ export default class App extends Component {
     const value = parseInt(e.target.value, 10);
 
     if(value < this.state.min || value > this.state.max) {
-      this.setState({ guess: null, error: 'Please enter number in range' })
+      this.setState({ guess: null, error: 'Please enter number in range', disabled: true })
     } else {
       this.setState({ guess: value, error: '', disabled: true })
     }
@@ -60,8 +60,6 @@ export default class App extends Component {
     if(isNaN(value)) {
       this.setState({ guess: null, error: 'Please enter a number', disabled: true })
     }
-
-    console.log(input.value);
 
     if(input.value.length > 0) {
       this.setState({ disabled: false })
@@ -94,11 +92,14 @@ export default class App extends Component {
 
   }
 
-  clearInput() {
+  clearGuessState() {
     this.setState({
       guess: null,
       disabled: true
     })
+  }
+
+  clearInput() {
     return document.querySelector('.guess-input').value = '';
   }
 
