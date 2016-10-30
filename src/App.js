@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import GuessField from './components/GuessField.jsx'
 import Display from './components/Display.jsx'
 import Header from './components/Header.jsx'
+import Range from './components/Range.jsx'
 import './App.css'
 
 export default class App extends Component {
@@ -53,6 +54,10 @@ export default class App extends Component {
     } else {
       this.setState({ guess: value, error: '' })
     }
+
+    if(isNaN(value)) {
+      this.setState({ guess: null, error: 'Please enter a number' })
+    }
   }
 
   newGame() {
@@ -75,17 +80,14 @@ export default class App extends Component {
     this.clearInput();
   }
 
+  updateRange() {
+
+  }
+
   clearInput() {
     return document.querySelector('.guess-input').value = '';
   }
 
-  changeMaxRange() {
-
-  }
-
-  changeMinRange() {
-
-  }
 
   render() {
     const { guess, feedback, max, min, error } = this.state;
@@ -102,6 +104,7 @@ export default class App extends Component {
             max={max}
             error={error}
           />
+          <Range min={min} max={max} handleChangeRange={() => this.updateRange()}/>
           <Display guess={guess} feedback={feedback} />
         </section>
       </section>

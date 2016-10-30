@@ -1,11 +1,8 @@
 import React from 'react'
-import Range from './Range.jsx'
-
 
 export default ({ handleGuessState, handleGame, handleResetGame, handleClear, min, max, error  }) => {
   return (
     <div>
-    <Range />
     <section className='guess-container'>
       <form className='guess-form'>
         <input
