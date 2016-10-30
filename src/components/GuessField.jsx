@@ -2,7 +2,7 @@ import React from 'react'
 import Range from './Range.jsx'
 
 
-export default ({ handleChangeGuess, handleGame, handleResetGame, handleClear, min, max  }) => {
+export default ({ handleGuessState, handleGame, handleResetGame, handleClear, min, max  }) => {
   return (
     <div>
     <Range />
@@ -13,6 +13,7 @@ export default ({ handleChangeGuess, handleGame, handleResetGame, handleClear, m
             placeholder='Make a guess'
             aria-label='input'
             className='guess-input'
+            onChange={(e) => handleGuessState(e)}
             min={min}
             max={max}
             />
