@@ -21,10 +21,14 @@ export default class App extends Component {
   }
 
   generateRandomNumber() {
-    let newRandomNumber = Math.floor((Math.random() * this.state.max) + 1);
+    let min = parseInt(this.state.min, 10)
+    let max = parseInt(this.state.max, 10)
+
+    let newRandomNumber = Math.floor((Math.random() * (max - min)) + min);
     this.setState({ randomNum: newRandomNumber }, () => {
       this.compareNumbers();
     });
+    console.log('randomnumber', newRandomNumber);
   }
 
   compareNumbers() {
@@ -50,7 +54,6 @@ export default class App extends Component {
   updateGuessState(e) {
     const input = document.querySelector('.guess-input')
     const value = parseInt(e.target.value, 10);
-    debugger
 
     if(input.value.length > 0) {
       this.setState({ disabled: false })
@@ -90,8 +93,16 @@ export default class App extends Component {
     this.clearInput();
   }
 
-  updateRange() {
+  updateMinRange(e) {
+    this.setState({
+      min: parseInt(e.target.value, 10)
+    })
+  }
 
+  updateMaxRange(e) {
+    this.setState({
+      max: parseInt(e.target.value, 10)
+    })
   }
 
   clearGuessState() {
@@ -122,7 +133,13 @@ export default class App extends Component {
             error={error}
             disabled={disabled}
           />
-          <Range min={min} max={max} handleChangeRange={() => this.updateRange()}/>
+          <Range
+            min={min}
+            max={max}
+            handleChangeMin={(e) => this.updateMinRange(e)}
+            handleChangeMax={(e) => this.updateMaxRange(e)}
+            handleNewNumber={() => this.generateRandomNumber()}
+          />
           <Display guess={guess} feedback={feedback} />
         </section>
       </section>

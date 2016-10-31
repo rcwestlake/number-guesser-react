@@ -1,13 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Range extends Component {
-  render() {
-    return (
-      <section className='ranger-container'>
-        <input type='number' className='low-field' aria-label='input' />
-        <input type='number' className='high-field' aria-label='input'/>
-        <button className='submit-range'>Change Range</button>
-      </section>
-    )
-  }
+export default ({ min, max, handleChangeMin, handleChangeMax, handleNewNumber }) => {
+  return (
+    <section className='ranger-container'>
+      <input type='number' className='min-input' aria-label='input' placeholder={min} onChange={(e) => handleChangeMin(e)} />
+      <input type='number' className='max-input' aria-label='input' placeholder={max} onChange={(e) => handleChangeMax(e)} />
+      <button className='submit-range' onClick={() => handleNewNumber()}>Change Range</button>
+    </section>
+  )
 }
