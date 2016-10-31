@@ -50,20 +50,22 @@ export default class App extends Component {
   updateGuessState(e) {
     const input = document.querySelector('.guess-input')
     const value = parseInt(e.target.value, 10);
+    debugger
+
+    if(input.value.length > 0) {
+      this.setState({ disabled: false })
+    }
 
     if(value < this.state.min || value > this.state.max) {
-      this.setState({ guess: null, error: 'Please enter number in range', disabled: true })
+      this.setState({ guess: value, error: 'Please enter number in range', disabled: true })
     } else {
-      this.setState({ guess: value, error: '', disabled: true })
+      this.setState({ guess: value, error: '', disabled: false })
     }
 
     if(isNaN(value)) {
       this.setState({ guess: null, error: 'Please enter a number', disabled: true })
     }
 
-    if(input.value.length > 0) {
-      this.setState({ disabled: false })
-    }
   }
 
   newGame() {
