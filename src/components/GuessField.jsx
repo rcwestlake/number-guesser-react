@@ -17,7 +17,7 @@ export default ({ handleGuessState, handleGame, handleResetGame, handleClear, mi
         <p>{error}</p>
         <button type='button' disabled={disabled} onClick={() => handleGame()}>Guess</button>
         <button type='button' disabled={disabled} onClick={() => handleClear()}>Clear</button>
-        <button type='button' onClick={() => handleResetGame()}>Reset Game</button>
+        <button type='button' disabled={disabled} onClick={() => handleResetGame()}>Reset Game</button>
       </form>
     </section>
 </div>

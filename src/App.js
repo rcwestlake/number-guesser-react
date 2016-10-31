@@ -28,45 +28,50 @@ export default class App extends Component {
     this.setState({ randomNum: newRandomNumber }, () => {
       this.compareNumbers();
     });
-    console.log('randomnumber', newRandomNumber);
+    
+    this.setState({
+      feedback: ''
+    })
   }
 
   compareNumbers() {
     if(this.state.randomNum === null) {
-      this.generateRandomNumber()
-      this.clearInput()
+      this.generateRandomNumber();
+      this.clearInput();
     } else {
-      this.checkGame()
+      this.checkGame();
     }
   }
 
   checkGame() {
     if(this.state.guess < this.state.randomNum) {
-      this.setState({feedback: 'That guess is too low. Try a higher number.'})
+      this.setState({feedback: 'That guess is too low. Try a higher number.'});
+      this.clearInput();
     } else if(this.state.guess > this.state.randomNum) {
-      this.setState({feedback: 'That guess is too high. Try a lower number.'})
+      this.setState({feedback: 'That guess is too high. Try a lower number.'});
+      this.clearInput();
     } else {
-      this.setState({feedback: 'Congratulations! You win. Now it will be harder (min and max changed).'})
-      this.newGame()
+      this.setState({feedback: 'Congratulations! You win. Now it will be harder (min and max changed).'});
+      this.newGame();
     }
   }
 
   updateGuessState(e) {
-    const input = document.querySelector('.guess-input')
+    const input = document.querySelector('.guess-input');
     const value = parseInt(e.target.value, 10);
 
     if(input.value.length > 0) {
-      this.setState({ disabled: false })
+      this.setState({ disabled: false });
     }
 
     if(value < this.state.min || value > this.state.max) {
-      this.setState({ guess: value, error: 'Please enter number in range', disabled: true })
+      this.setState({ guess: value, error: 'Please enter number in range', disabled: true });
     } else {
-      this.setState({ guess: value, error: '', disabled: false })
+      this.setState({ guess: value, error: '', disabled: false });
     }
 
     if(isNaN(value)) {
-      this.setState({ guess: null, error: 'Please enter a number', disabled: true })
+      this.setState({ guess: null, error: 'Please enter a number', disabled: true });
     }
 
   }
