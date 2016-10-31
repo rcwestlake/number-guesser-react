@@ -2,8 +2,71 @@ body {
   box-sizing: border-box;
 }
 
+button {
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  color: #ffffff;
+  cursor: pointer;
+  margin-left: 20px;
+  width: 100px;
+}
+
+button:hover {
+  background-color: #ffffff;
+  color: #2A3356;
+}
+
+.header {
+  color: white;
+}
+
 .display-container {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.game-container {
+  display: flex;
+}
+
+.left-container {
+  background-color: #2A3356;
+  height: 100vh;
+  text-align: center;
+  width: 50%;
+}
+
+.error {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.guess-input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid #ffffff;
+  color: #ffffff;
+  font-size: 45px;
+  margin-top: 30px;
+  text-align: center;
+  width: 200px;
+}
+
+.display-section {
+  text-align: center;
+  width: 50%;
+}
+
+.min-input, .max-input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid #ffffff;
+  color: #ffffff;
+  font-size: 20px;
+  margin-top: 30px;
+  margin-left: 10px;
+  text-align: center;
+  width: 100px;
 }

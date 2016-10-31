@@ -4,17 +4,20 @@ export default ({ handleGuessState, handleGame, handleResetGame, handleClear, mi
   return (
     <div>
     <section className='guess-container'>
+      <section className='header'>
+        <h1 className='title'>Number Guesser</h1>
+      </section>
       <form className='guess-form'>
         <input
             type='number'
-            placeholder='Make a guess'
+            placeholder='Guess'
             aria-label='input'
             className='guess-input'
             onChange={(e) => handleGuessState(e)}
             min={min}
             max={max}
             />
-        <p>{error}</p>
+        <p className='error'>{error}</p>
         <button type='button' disabled={disabled} onClick={() => handleGame()}>Guess</button>
         <button type='button' disabled={disabled} onClick={() => handleClear()}>Clear</button>
         <button type='button' disabled={disabled} onClick={() => handleResetGame()}>Reset Game</button>
