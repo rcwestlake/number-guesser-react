@@ -6,7 +6,8 @@ export default ({ guess, feedback }) => {
 
   return (
     <section className='display-section'>
-      <p className='guess'>Your Guess: {guess}</p>
+      <p className='guess-title'>Guess:</p>
+      <p className='guess'>{guess}</p>
       <p className='guess-feedback'>{feedback}</p>
     </section>
   )
