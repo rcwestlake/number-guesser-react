@@ -83,4 +83,10 @@ button:disabled {
 
 .guess-title {
   font-size: 15px;
+  margin-top: 150px;
+}
+
+.guess {
+  font-size: 85px;
+  margin: 15px 0px;
 }
