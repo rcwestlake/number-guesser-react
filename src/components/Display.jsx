@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default ({ guess, feedback }) => {
+export default ({ guess, feedback, button, startGame }) => {
   console.log(guess)
 
   return (
@@ -9,6 +9,7 @@ export default ({ guess, feedback }) => {
       <p className='guess-title'>Guess:</p>
       <p className='guess'>{guess}</p>
       <p className='guess-feedback'>{feedback}</p>
+      <span onClick={() => startGame()}>{button}</span>
     </section>
   )
 }
