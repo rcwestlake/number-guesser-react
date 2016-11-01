@@ -43,12 +43,14 @@ export default class App extends Component {
   }
 
   checkGame() {
-    if(this.state.guess < this.state.randomNum) {
+    if(this.state.guess === null){
+      this.setState({feedback: ''});
+    } else if(this.state.guess < this.state.randomNum) {
       this.setState({feedback: 'That guess is too low. Try a higher number.'});
     } else if(this.state.guess > this.state.randomNum) {
       this.setState({feedback: 'That guess is too high. Try a lower number.'});
     } else {
-      this.setState({feedback: 'Congratulations! You win. Now it will be harder (min and max changed).'});
+      this.setState({feedback: 'Congratulations! Press the button to play again (min and max have changed).'});
     }
     this.clearInput();
     this.setState({ disabled: true })
@@ -75,6 +77,7 @@ export default class App extends Component {
 
   newGame() {
     this.setState({
+      guess: null,
       randomNum: null,
       min: this.state.min - 10,
       max: this.state.max + 10,
@@ -82,7 +85,7 @@ export default class App extends Component {
       feedback: '',
       disabled: true
     })
-    this.clearInput();
+    this.clearRangeFields();
   }
 
   resetGame() {
@@ -136,7 +139,7 @@ export default class App extends Component {
       guess === null ? true : false
     )
 
-    if(this.state.feedback === 'Congratulations! You win. Now it will be harder (min and max changed).') {
+    if(this.state.feedback === 'Congratulations! Press the button to play again (min and max have changed).') {
       newGameButton = <button className='new-game-btn'>New Game</button>
     }
 
