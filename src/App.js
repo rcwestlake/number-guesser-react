@@ -20,8 +20,8 @@ export default class App extends Component {
   }
 
   generateRandomNumber() {
-    let min = parseInt(this.state.min, 10)
-    let max = parseInt(this.state.max, 10)
+    let min = parseInt(this.state.min, 10);
+    let max = parseInt(this.state.max, 10);
 
     let newRandomNumber = Math.floor((Math.random() * (max - min)) + min);
     this.setState({ randomNum: newRandomNumber }, () => {
@@ -43,16 +43,17 @@ export default class App extends Component {
   }
 
   checkGame() {
-    if(this.state.guess < this.state.randomNum) {
+    if(this.state.guess === null){
+      this.setState({feedback: ''});
+    } else if(this.state.guess < this.state.randomNum) {
       this.setState({feedback: 'That guess is too low. Try a higher number.'});
-      this.clearInput();
     } else if(this.state.guess > this.state.randomNum) {
       this.setState({feedback: 'That guess is too high. Try a lower number.'});
-      this.clearInput();
     } else {
-      this.setState({feedback: 'Congratulations! You win. Now it will be harder (min and max changed).'});
-      this.newGame();
+      this.setState({feedback: 'Congratulations! Press the button to play again (min and max have changed).'});
     }
+    this.clearInput();
+    this.setState({ disabled: true })
   }
 
   updateGuessState(e) {
@@ -72,17 +73,19 @@ export default class App extends Component {
     if(isNaN(value)) {
       this.setState({ guess: null, error: 'Please enter a number', disabled: true });
     }
-
   }
 
   newGame() {
     this.setState({
+      guess: null,
       randomNum: null,
       min: this.state.min - 10,
       max: this.state.max + 10,
-      error: ''
+      error: '',
+      feedback: '',
+      disabled: true
     })
-    this.clearInput();
+    this.clearRangeFields();
   }
 
   resetGame() {
@@ -92,9 +95,11 @@ export default class App extends Component {
       min: 0,
       max: 100,
       feedback: '',
-      error: ''
+      error: '',
+      disabled: true
     })
     this.clearInput();
+    this.clearRangeFields();
   }
 
   updateMinRange(e) {
@@ -114,15 +119,30 @@ export default class App extends Component {
       guess: null,
       disabled: true
     })
+    this.clearInput();
   }
 
   clearInput() {
     return document.querySelector('.guess-input').value = '';
   }
 
+  clearRangeFields() {
+    document.querySelector('.min-input').value = '';
+    document.querySelector('.max-input').value = '';
+  }
+
 
   render() {
     const { guess, feedback, max, min, error, disabled } = this.state;
+    let newGameButton;
+    let resetDisabled = (
+      guess === null ? true : false
+    )
+
+    if(this.state.feedback === 'Congratulations! Press the button to play again (min and max have changed).') {
+      newGameButton = <button className='new-game-btn'>New Game</button>
+    }
+
     return (
       <section className='application'>
         <section className='game-container'>
@@ -131,11 +151,12 @@ export default class App extends Component {
             handleGuessState={(e) => this.updateGuessState(e)}
             handleGame={() => this.compareNumbers()}
             handleResetGame={() => this.resetGame()}
-            handleClear={() => this.clearInput()}
+            handleClear={() => this.clearGuessState()}
             min={min}
             max={max}
             error={error}
             disabled={disabled}
+            disabledCase={resetDisabled}
             />
             <Range
             min={min}
@@ -145,7 +166,7 @@ export default class App extends Component {
             handleNewNumber={() => this.generateRandomNumber()}
             />
           </section>
-          <Display guess={guess} feedback={feedback} />
+          <Display guess={guess} feedback={feedback} button={newGameButton} startGame={() => this.newGame()}/>
         </section>
       </section>
     )

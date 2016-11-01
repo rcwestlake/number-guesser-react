@@ -90,3 +90,13 @@ button:disabled {
   font-size: 85px;
   margin: 15px 0px;
 }
+
+.new-game-btn {
+  border: 1px solid #2A363B;
+  color: #2A363B;
+}
+
+.new-game-btn:hover {
+  border: 1px solid #E84A5F;
+  color: #E84A5F;
+}
