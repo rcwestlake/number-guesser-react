@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default ({ handleGuessState, handleGame, handleResetGame, handleClear, min, max, error, disabled, disabledCase  }) => {
-
   return (
     <div>
     <section className='guess-container'>

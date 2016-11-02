@@ -75,31 +75,18 @@ export default class App extends Component {
     }
   }
 
-  newGame() {
+  resetOrStartGame(boolean) {
     this.setState({
       guess: null,
       randomNum: null,
-      min: this.state.min - 10,
-      max: this.state.max + 10,
+      min: boolean ? this.state.min - 10 : 0,
+      max: boolean ? this.state.max + 10 : 100,
       error: '',
       feedback: '',
       disabled: true
     })
-    this.clearRangeFields();
-  }
-
-  resetGame() {
-    this.setState({
-      randomNum: null,
-      guess: null,
-      min: 0,
-      max: 100,
-      feedback: '',
-      error: '',
-      disabled: true
-    })
-    this.clearInput();
-    this.clearRangeFields();
+    this.clearRangeFields()
+    return boolean ? () => {} : this.clearInput()
   }
 
   updateMinRange(e) {
@@ -150,7 +137,7 @@ export default class App extends Component {
             <GuessField
             handleGuessState={(e) => this.updateGuessState(e)}
             handleGame={() => this.compareNumbers()}
-            handleResetGame={() => this.resetGame()}
+            handleResetGame={() => this.resetOrStartGame(false)}
             handleClear={() => this.clearGuessState()}
             min={min}
             max={max}
@@ -166,7 +153,7 @@ export default class App extends Component {
             handleNewNumber={() => this.generateRandomNumber()}
             />
           </section>
-          <Display guess={guess} feedback={feedback} button={newGameButton} startGame={() => this.newGame()}/>
+          <Display guess={guess} feedback={feedback} button={newGameButton} startGame={() => this.resetOrStartGame(true)}/>
         </section>
       </section>
     )

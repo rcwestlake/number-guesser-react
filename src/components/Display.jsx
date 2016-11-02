@@ -1,9 +1,6 @@
 import React from 'react';
 
-
 export default ({ guess, feedback, button, startGame }) => {
-  console.log(guess)
-
   return (
     <section className='display-section'>
       <p className='guess-title'>GUESS:</p>
